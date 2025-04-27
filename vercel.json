@@ -1,11 +1,11 @@
 {
-  "version": 2,
-  "builds": [
+  "devCommand": "uvicorn main:app --host 0.0.0.0 --port 3000",
+  "functions": {
+    "/index.py":
     {
-      "src": "Dockerfile",
-      "use": "@vercel/docker"
+      "runtime": "python@3.9"
     }
-  ],
+  },
   "routes": [
     {
       "src": "/(.*)",
