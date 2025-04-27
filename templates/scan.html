@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan Absent</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Scan Absensi</h2>
+        <video id="video" width="640" height="480" autoplay></video>
+        <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+        <button id="captureButton" class="btn">Capture</button>
+
+        <form id="photo-form" action="/submit-absent" method="POST" enctype="multipart/form-data" style="display: none;">
+            <input type="file" id="photo" name="photo" accept="image/*">
+        </form>
+
+        <script src="{{ url_for('static', filename='js/camera.js') }}"></script>
+    </div>
+</body>
+</html>

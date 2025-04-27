@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+
+    <h2>Daftar User</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user[0] }}</td>
+            <td>{{ user[1] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Daftar Absensi</h2>
+
+    <!-- Filter: Pilih User atau Tanggal (versi manual, reload page) -->
+    <form method="get" action="/admin">
+        <label for="username">Filter Username:</label>
+        <input type="text" name="username" id="username">
+        <label for="tanggal">Filter Tanggal (YYYY-MM-DD):</label>
+        <input type="text" name="tanggal" id="tanggal">
+        <button type="submit">Filter</button>
+    </form>
+
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Tanggal</th>
+            <th>Waktu</th>
+            <th>Foto</th>
+        </tr>
+        {% for a in absensi %}
+        <tr>
+            <td>{{ a[0] }}</td>
+            <td>{{ a[1] }}</td>
+            <td>{{ a[2] }}</td>
+            <td>{{ a[3] }}</td>
+            <td><img src="{{ url_for('static', filename=a[4][7:]) }}" width="100"></td>
+        </tr>
+        {% endfor %}
+        {% if absensi_data == "No attendance data found." %}
+  <p>No data available</p>
+{% else %}
+  <table>
+    <tr>
+      <th>User ID</th>
+      <th>Tanggal</th>
+      <th>Waktu</th>
+      <th>Foto</th>
+    </tr>
+    {% for row in absensi_data %}
+      <tr>
+        <td>{{ row[1] }}</td>
+        <td>{{ row[2] }}</td>
+        <td>{{ row[3] }}</td>
+        <td><img src="{{ row[4] }}" width="50" height="50"></td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endif %}
+
+    </table>
+</body>
+</html>
